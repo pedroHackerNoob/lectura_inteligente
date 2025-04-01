@@ -10,7 +10,7 @@ public class Main {
     private static String estadoTemp;
     private static String titulo;
     private static int encontrado;
-
+    static int id= 0;
     static void librodefec(){
 //        libros.add(new Libro("carpincho","GAYel","Disponible",102));
         libros.add(new Libro("circus","sebASS","Disponible",103));
@@ -54,7 +54,9 @@ public class Main {
                 break;
         }
     }
+    static void tituloLibro(){
 
+    }
     static void registrar(){
         estadoTemp = "Disponible";
 
@@ -81,23 +83,31 @@ public class Main {
         System.out.println("###############################");
         System.out.println("Devoluciones\nIntroduzca el titulo del libro");
         try {
-            titulo = sc.next();
+            titulo = "pp";
         } catch (Exception e) {
             System.out.println("Titulo invalido");
             sc.nextLine();
         }
-        libros.add(new Libro(titulo,"Default","default",-1));
+        libros.add(new Libro(titulo,"Default","null",-1));
         buscar();
         if (encontrado ==0){
             System.out.println("el libro no esta registrado");
+            libros.remove(id);
         } else if (encontrado == 1) {
             System.out.println("Libro ya esta disponible");
         }else if (encontrado == 2) {
             System.out.println("ya ha sido devuelto");
         }
+        mostrar();
     }
     static void buscar(){
         for(Libro libros1 : libros){
+            if (libros1.getEstado().equals("null")){
+                System.out.println("libro de catalogo no encontrado");
+                encontrado = 0;
+                System.out.println(id);
+                break;
+            }
             if(libros1.getTitulo().equals(titulo)){
                 System.out.println("libro de catalogo encontrado");
 //                disponibilidad del libro
@@ -109,11 +119,9 @@ public class Main {
                     break;
                 }
             }
-            else if (libros1.getCodigo() == -1){
-                System.out.println("libro de catalogo no encontrado");
-                encontrado = 0;
-            }
+            ++id;
         }
+        mostrar();
     }
 //    mostrar
     static void mostrar(){
@@ -129,8 +137,6 @@ public class Main {
 
         librodefec();
         mostrar();
-//        menu();
         devolver();
-        sc.close();
     }
 }
