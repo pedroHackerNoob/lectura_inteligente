@@ -83,16 +83,16 @@ public class Main {
         System.out.println("###############################");
         System.out.println("Devoluciones\nIntroduzca el titulo del libro");
         try {
-            titulo = "pp";
+            titulo = "cisco";
         } catch (Exception e) {
             System.out.println("Titulo invalido");
             sc.nextLine();
         }
         libros.add(new Libro(titulo,"Default","null",-1));
         buscar();
+        libros.remove(id);
         if (encontrado ==0){
             System.out.println("el libro no esta registrado");
-            libros.remove(id);
         } else if (encontrado == 1) {
             System.out.println("Libro ya esta disponible");
         }else if (encontrado == 2) {
