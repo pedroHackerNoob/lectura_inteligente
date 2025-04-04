@@ -19,8 +19,11 @@ public class Main {
     }
 //    menu de software
     static void menu(){
-        int selection = 4;
+        int selection = 0;
         System.out.println("\n");
+        librodefec();
+        mostrar();
+        try {
         System.out.println(
                 """
                         [1]Registrar Libro
@@ -28,12 +31,13 @@ public class Main {
                         [3]Devolver Libro
                         [4]Consultar Libros
                         """);
-        try {
-            selection = sc.nextInt();
+//            selection = sc.nextInt();
+            selection = 3;
+            System.out.println(selection);
         }
         catch(Exception e) {
             System.out.println("Opcion Invalida");
-            sc.next();
+            sc.nextLine();
         }
         switch (selection) {
             case 1:
@@ -53,13 +57,14 @@ public class Main {
                 mostrar();
                 break;
         }
+        mostrar();
     }
 //    ingresar titulo del libro
-    static void tituloLibro() {
-//        System.out.println("Introduzca el titulo del libro");
+    private static void tituloLibro() {
+        System.out.println("Introduzca el titulo del libro");
         try {
 //            titulo = sc.next();
-            titulo = "circus";
+            System.out.println(titulo = "crack");
         } catch (Exception e) {
             System.out.println("Titulo invalido");
             sc.nextLine();
@@ -67,29 +72,31 @@ public class Main {
         libros.add(new Libro(titulo,"null","null",000));
     }
 //    registrar libro
-    static void registrar(){
+    private static void registrar(){
         estadoTemp = "Registrado";
-
+        tituloLibro();
+        buscarEstado();
         try {
             System.out.println("Introduzca el autor");
-            autor = sc.next();
+//            autor = sc.next();
+            System.out.println(autor = "pimpollo");
             System.out.println("Introduzca el codigo");
-            codigo = sc.nextInt();
-
+//            codigo = sc.nextInt();
+            System.out.println(codigo = 113);
         } catch (Exception e) {
             System.out.println("Titulo invalido");
             sc.nextLine();
         }
-        if(encontrado==3){
+        borrarLibroTemp();
+        if(encontrado==0){
             libros.add(new Libro(titulo, autor,"Disponible", codigo));
-        } else if (encontrado==1 || encontrado==2) {
+        } else if (encontrado>=1) {
             System.out.println("el libro ya ha sido registrado anteriormente");
 
         }
-        mostrar();
     }
 //    prestar libro
-    static void prestar(){
+    private static void prestar(){
         estadoTemp = "Prestado";
         System.out.println("\n\tPrestaciones\n");
         tituloLibro();
@@ -106,10 +113,9 @@ public class Main {
         }else {
             System.out.println("el libro no esta registrado");
         }
-        mostrar();
     }
 //    devolver libro
-    static void devolver(){
+    private static void devolver(){
         System.out.println("\n\tDevoluciones\n");
         tituloLibro();
         buscarEstado();
@@ -127,21 +133,16 @@ public class Main {
         }else {
             System.out.println("el libro no esta registrado");
         }
-        mostrar();
     }
 //    buscar el estado del libro
-    static void buscarEstado(){
-
+    private static void buscarEstado(){
         for(Libro libros1 : libros){
 //            se busca el titulo
             if(
                     libros1.getTitulo().equals(titulo) && libros1.getEstado().equals("Disponible")
                     ||
-                    libros1.getTitulo().equals(titulo) && libros1.getEstado().equals("Prestado")
-            )
-
+                    libros1.getTitulo().equals(titulo) && libros1.getEstado().equals("Prestado"))
             {
-
                 System.out.println("Encontrado:\n");
                 System.out.println("------------------------------------------------------------");
                 System.out.println(libros1);
@@ -155,13 +156,13 @@ public class Main {
                     case "Disponible" -> {
                         encontrado = 1;
                         System.out.println("\tDisponible");
-                        System.out.println("=====================");
+                        System.out.println("======================");
                     }
 //                se cambia la disponibilidad del libro
                     case "Prestado" -> {
                         encontrado = 2;
                         System.out.println("\tPrestado");
-                        System.out.println("=====================");
+                        System.out.println("======================");
                     }
 //                    se registra el libro
                     case "Registrado" -> encontrado = 3;
@@ -180,7 +181,8 @@ public class Main {
         }
     }
 //    mostrar
-    static void mostrar(){
+    private static void mostrar(){
+        System.out.println("################################################################");
         System.out.println("\n\tLibros disponibles");
         for (Libro libro : libros) {
             System.out.println("------------------------------------------------------------");
@@ -188,15 +190,15 @@ public class Main {
         }
         System.out.println("------------------------------------------------------------");
     }
-    static void borrarLibroTemp(){
+//    borra el libro temporal
+    private static void borrarLibroTemp(){
         if (rm >= 0){
             libros.remove(libros.get(rm));
         }
     }
-    public static void main(String[] args) {
+//
 
-        librodefec();
-        mostrar();
-        devolver();
+    public static void main(String[] args) {
+        menu();
     }
 }
