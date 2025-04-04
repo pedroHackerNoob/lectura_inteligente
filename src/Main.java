@@ -10,14 +10,14 @@ public class Main {
     private static String estadoTemp;
     private static String titulo, autor;
     private static int encontrado,codigo,id= 0, rm,edit;
-
+//    libros guardados por default
     static void librodefec(){
         libros.add(new Libro("carpincho","GAYel","Disponible",102));
         libros.add(new Libro("circus","sebASS","Disponible",103));
         libros.add(new Libro("crack","Osito","Prestado",104));
         libros.add(new Libro("meta","Telleachea","Prestado",105));
     }
-
+//    menu de software
     static void menu(){
         int selection = 4;
         System.out.println("\n");
@@ -54,6 +54,7 @@ public class Main {
                 break;
         }
     }
+//    ingresar titulo del libro
     static void tituloLibro() {
 //        System.out.println("Introduzca el titulo del libro");
         try {
@@ -65,6 +66,7 @@ public class Main {
         }
         libros.add(new Libro(titulo,"null","null",000));
     }
+//    registrar libro
     static void registrar(){
         estadoTemp = "Registrado";
 
@@ -86,7 +88,7 @@ public class Main {
         }
         mostrar();
     }
-    //    prestar e libro
+//    prestar libro
     static void prestar(){
         estadoTemp = "Prestado";
         System.out.println("\n\tPrestaciones\n");
@@ -95,20 +97,18 @@ public class Main {
         borrarLibroTemp();
         //        indica que la operacion ya fue hecha
         if (encontrado == 1) {
-            System.out.println("El libro ya ha sido prestado");
+            System.out.println("El libro ha sido prestado");
             libros.get(edit).setEstado(estadoTemp);
         }
 //      indica que la operacion se ha completado
         else if (encontrado == 2) {
-            System.out.println("El libro ha sido prestado");
-
+            System.out.println("El libro ya ha sido prestado");
         }else {
             System.out.println("el libro no esta registrado");
         }
         mostrar();
     }
-
-    //    devolver el libro
+//    devolver libro
     static void devolver(){
         System.out.println("\n\tDevoluciones\n");
         tituloLibro();
@@ -141,22 +141,27 @@ public class Main {
             )
 
             {
-                System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                System.out.println("titulo encontrado:");
+
+                System.out.println("Encontrado:\n");
+                System.out.println("------------------------------------------------------------");
                 System.out.println(libros1);
-                System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                System.out.println("------------------------------------------------------------");
+                System.out.println("======================");
+                System.out.println("Estado del libro:");
 //                se asigna el id de donde esta el titulo
                 edit = id;
                 switch (libros1.getEstado()){
 //                se cambia la disponibilidad del libro
                     case "Disponible" -> {
                         encontrado = 1;
-                        System.out.println("Libro disponible");
+                        System.out.println("\tDisponible");
+                        System.out.println("=====================");
                     }
 //                se cambia la disponibilidad del libro
                     case "Prestado" -> {
                         encontrado = 2;
-                        System.out.println("Libro prestado");
+                        System.out.println("\tPrestado");
+                        System.out.println("=====================");
                     }
 //                    se registra el libro
                     case "Registrado" -> encontrado = 3;
@@ -176,17 +181,12 @@ public class Main {
     }
 //    mostrar
     static void mostrar(){
-//        libros.forEach(System.out::println);
         System.out.println("\n\tLibros disponibles");
-        System.out.println("############################################################");
         for (Libro libro : libros) {
+            System.out.println("------------------------------------------------------------");
             System.out.println(libro);
         }
-        System.out.println("############################################################");
-    }
-//    Disponibilidad
-    static void disponibilidad(){
-
+        System.out.println("------------------------------------------------------------");
     }
     static void borrarLibroTemp(){
         if (rm >= 0){
@@ -197,6 +197,6 @@ public class Main {
 
         librodefec();
         mostrar();
-        prestar();
+        devolver();
     }
 }
